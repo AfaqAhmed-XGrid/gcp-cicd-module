@@ -1,4 +1,6 @@
 steps:
-  - name: 'Build'
-    script:
-      - echo "This is a test build to check if the trigger and everything is working fine."
+  - name: 'alpine'
+    entrypoint: '/bin/sh'
+    args:
+      - '-c'
+      - 'echo "This is a test build to check if the trigger and everything is working fine."'
