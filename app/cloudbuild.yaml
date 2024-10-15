@@ -14,7 +14,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
     id: 'Push to Artifact Registry'
 
   # Step 3: Trigger deployment pipeline
