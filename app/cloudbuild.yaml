@@ -36,5 +36,5 @@ availableSecrets:
   secretManager:
   - versionName: projects/${PROJECT_ID}/secrets/afaq-webhook-secret/versions/1
     env: 'WEBHOOK_SECRET'
-  - versionName: projects/PROJECT_ID/secrets/afaq-webhook-api-key/versions/1
+  - versionName: projects/${PROJECT_ID}/secrets/afaq-webhook-api-key/versions/1
     env: 'API_KEY'
