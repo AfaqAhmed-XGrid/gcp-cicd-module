@@ -1,9 +1,24 @@
+# Author: Afaq Ahemd <afaq.ahmed@xgrid.co>
+
 steps:
-  - name: 'alpine'
-    entrypoint: '/bin/sh'
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
     args:
-      - '-c'
-      - 'echo "This is a test build to check if the trigger and everything is working fine."'
+      - 'build'
+      - '-t'
+      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/ui-${BRANCH_NAME}:$COMMIT_SHA'
+      - './app'
+    id: 'Build Docker Image'
+
+  # Step 2: Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/ui-${BRANCH_NAME}:$COMMIT_SHA'
+    id: 'Push to Artifact Registry'
+
+images:
+  - 'us-east1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/ui-${BRANCH_NAME}:$COMMIT_SHA'
 
 options:
   logging: CLOUD_LOGGING_ONLY
