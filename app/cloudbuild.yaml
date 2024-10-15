@@ -6,7 +6,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
       - './app'
     id: 'Build Docker Image'
 
@@ -27,7 +27,7 @@ steps:
     id: 'Trigger deployment pipeline'
 
 images:
-  - 'us-east1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+  - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
 
 options:
   logging: CLOUD_LOGGING_ONLY
