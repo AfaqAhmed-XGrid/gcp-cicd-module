@@ -22,12 +22,14 @@ steps:
     args:
       - -X
       - POST
-      - "https://cloudbuild.googleapis.com/v1/projects/${PROJECT_ID}/triggers/cloud-systems-app-ui-deployer:webhook?key=$API_KEY&secret=$WEBHOOK_SECRET" -d '{ "artifact": "'$SHORT_SHA'" }'
+      - "https://cloudbuild.googleapis.com/v1/projects/${PROJECT_ID}/triggers/cloud-systems-app-ui-deployer:webhook?key=$API_KEY&secret=$WEBHOOK_SECRET"
+      - -d
+      - '{ "artifact": "'$SHORT_SHA'" }'
     secretEnv: ['WEBHOOK_SECRET', 'API_KEY']
     id: 'Trigger deployment pipeline'
 
-images:
-  - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+# images:
+#   - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
 
 options:
   logging: CLOUD_LOGGING_ONLY
