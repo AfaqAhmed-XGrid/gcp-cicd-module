@@ -2,27 +2,27 @@
 
 steps:
   # Step 1: Build the Docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'build'
-      - '-t'
-      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
-      - './app'
-    id: 'Build Docker Image'
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args:
+  #     - 'build'
+  #     - '-t'
+  #     - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+  #     - './app'
+  #   id: 'Build Docker Image'
 
   # Step 2: Push the Docker image to Artifact Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'push'
-      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
-    id: 'Push to Artifact Registry'
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args:
+  #     - 'push'
+  #     - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+  #   id: 'Push to Artifact Registry'
 
   # Step 3: Trigger deployment pipeline
   - name: 'gcr.io/cloud-builders/curl'
     args:
       - -X
-      - Post
-      - "https://cloudbuild.googleapis.com/v1/projects/mustafa-s204/triggers/cloud-systems-app-ui-deployer:webhook?key=$$API_KEY&secret=$$WEBHOOK_SECRET"
+      - POST
+      - "https://cloudbuild.googleapis.com/v1/projects/${PROJECT_ID}/triggers/cloud-systems-app-ui-deployer:webhook?key=$API_KEY&secret=$WEBHOOK_SECRET" -d '{ "artifact": "'$SHORT_SHA'" }'
     secretEnv: ['WEBHOOK_SECRET', 'API_KEY']
     id: 'Trigger deployment pipeline'
 
