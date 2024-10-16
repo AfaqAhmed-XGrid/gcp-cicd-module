@@ -2,20 +2,20 @@
 
 steps:
   # Step 1: Build the Docker image
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args:
-  #     - 'build'
-  #     - '-t'
-  #     - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
-  #     - './app'
-  #   id: 'Build Docker Image'
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+      - './app'
+    id: 'Build Docker Image'
 
   # Step 2: Push the Docker image to Artifact Registry
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args:
-  #     - 'push'
-  #     - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
-  #   id: 'Push to Artifact Registry'
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+    id: 'Push to Artifact Registry'
 
   # Step 3: Trigger deployment pipeline
   - name: 'gcr.io/cloud-builders/curl'
@@ -26,8 +26,8 @@ steps:
     secretEnv: ['WEBHOOK_SECRET', 'API_KEY']
     id: 'Trigger deployment pipeline'
 
-# images:
-#   - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
+images:
+  - 'us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}'
 
 options:
   logging: CLOUD_LOGGING_ONLY
