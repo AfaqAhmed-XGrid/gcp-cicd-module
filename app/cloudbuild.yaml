@@ -19,12 +19,10 @@ steps:
 
   # Step 3: Trigger deployment pipeline
   - name: 'gcr.io/cloud-builders/curl'
+    entrypoint: bash
     args:
-      - -X
-      - POST
-      - "https://cloudbuild.googleapis.com/v1/projects/${PROJECT_ID}/triggers/cloud-systems-app-ui-deployer:webhook?key=$API_KEY&secret=$WEBHOOK_SECRET"
-      - -d
-      - '{ "artifact": "'$SHORT_SHA'" }'
+      - -c
+      - ./deployment-trigger.sh $PROJECT_ID $API_KEY $WEBHOOK_SECRET $SHORT_SHA
     secretEnv: ['WEBHOOK_SECRET', 'API_KEY']
     id: 'Trigger deployment pipeline'
 
