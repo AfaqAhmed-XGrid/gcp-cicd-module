@@ -8,7 +8,7 @@ steps:
         echo "Container Tag: " $_CONTAINER_TAG
 
         gcloud config set project $_PROJECT_ID
-        gcloud run deploy afaq-cloudrun-service --image us-east1-docker.pkg.dev/${_PROJECT_ID}/afaq-docker-repo/ui-$_CONTAINER_TAG' --region us-east1
+        gcloud run deploy afaq-cloudrun-service --image us-east1-docker.pkg.dev/${_PROJECT_ID}/afaq-docker-repo/ui-$_CONTAINER_TAG --region us-east1
     id: 'Deploy ui app'
 
 options:
