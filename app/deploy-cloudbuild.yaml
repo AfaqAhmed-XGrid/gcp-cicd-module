@@ -1,9 +1,12 @@
 steps:
-  - name: 'alpine'
-    entrypoint: '/bin/sh'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
     args:
-      - '-c'
-      - 'echo "This is a test build to check if the trigger and everything is working fine."'
+      - -c
+      - |
+        gcloud config set project $PROJECT_ID
+        gcloud run deploy afaq-cloudrun-service--image us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}' --region us-east1
+    id: 'Deploy ui app'
 
 options:
   logging: CLOUD_LOGGING_ONLY
