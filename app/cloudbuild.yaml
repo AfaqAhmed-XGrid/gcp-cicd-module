@@ -22,7 +22,7 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - ./app/deployment-trigger.sh $PROJECT_ID $$API_KEY $$WEBHOOK_SECRET $SHORT_SHA
+      - ./app/deployment-trigger.sh $PROJECT_ID $$API_KEY $$WEBHOOK_SECRET ${BRANCH_NAME}:${SHORT_SHA}
     secretEnv: ['WEBHOOK_SECRET', 'API_KEY']
     id: 'Trigger deployment pipeline'
 
