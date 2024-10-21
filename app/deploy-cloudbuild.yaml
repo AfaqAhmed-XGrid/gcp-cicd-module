@@ -5,7 +5,7 @@ steps:
       - -c
       - |
         gcloud config set project $PROJECT_ID
-        gcloud run deploy afaq-cloudrun-service--image us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}' --region us-east1
+        gcloud run deploy afaq-cloudrun-service --image us-east1-docker.pkg.dev/${PROJECT_ID}/afaq-docker-repo/ui-${BRANCH_NAME}:${SHORT_SHA}' --region us-east1
     id: 'Deploy ui app'
 
 options:
